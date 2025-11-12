@@ -4,33 +4,44 @@ This repository provides a pipeline to predict figure skating moves from pre-ext
 
 ---
 
-## 📂 Repository Structure
+## Repository Structure
 
+```plaintext
 repo/
-├── data/ # Pre-extracted skeleton data (.npy files)
-├── model/ # Pretrained model file (.pt)
-├── outputs/ # JSON outputs from predictions
-├── src/ # Python scripts
-│ └── inference.py # Run predictions
-└── README.md
+├── data/                # Pre-extracted skeleton data (.npy files)            
+├── model/               # Pretrained model file (.pt)
+├── outputs/             # JSON outputs from predictions     
+├── src/                 # Python scripts
+├──  └── inference.py    # Run predictions 
+└── README.md            # Project documentation
+```
 
 ---
 
-## ⚡ Features
+## Features
 
-- Predicts figure skating moves from skeleton data.
-- Applies independent penalties for over-represented moves.
-- Merges consecutive moves of the same type.
-- Outputs time-stamped predictions in JSON format.
-- Configurable for different videos, models, and intervals.
+- Loades keypoints extracted from video for each frame from data/ folder.
+- Filter to get keypoints of only perfomer.
+- Post-processing skeleton to feed into model for prediction.
+- Predicts move by feeding model chunks of 500 frames.
+- Outputs .json file saved in output/ folder with moves predicted for each chunk of frames.
+
+- The part which calculates the skeleton data using Openpose and post-processing of those keypoints works independently from this repo, it would be integrated and add to this repo soon.
 
 ---
 
-## 🏃‍♂️ How to Run
+## How to Use
 
 # 1. Clone the repository
+
+```bash
 git clone https://github.com/yourusername/SkatingMovePrediction.git
+
 cd SkatingMovePrediction
+```
 
 # 2. Run the inference script
+
+```bash
 python src/inference.py
+```
